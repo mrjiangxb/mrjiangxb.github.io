@@ -67,7 +67,7 @@
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/images/20190824_01.PNG">
 <meta property="og:image" content="http://yoursite.com/images/20190824_02.PNG">
-<meta property="og:updated_time" content="2019-08-25T02:43:37.460Z">
+<meta property="og:updated_time" content="2019-08-25T02:45:28.923Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Vue单页面框架实现多页面效果">
 <meta name="twitter:description" content="简介Vue.js（简称为Vue）是一个用于创建用户界面的开源JavaScript框架，也是一个创建单页应用的Web应用框架。但是在开发过程中有时需要展示多页面效果，比如用户登录注册页面需要展示一个全新的页面，路由跳转时需要展示一个新的导航栏。如果直接使用路由跳转，页面中会同时展示App.vue中的公共组件和该路由组件，达不到所需效果。">
@@ -243,7 +243,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-08-25 10:43:37" itemprop="dateModified" datetime="2019-08-25T10:43:37+08:00">2019-08-25</time>
+                <time title="修改时间：2019-08-25 10:45:28" itemprop="dateModified" datetime="2019-08-25T10:45:28+08:00">2019-08-25</time>
               </span>
             
           
@@ -274,8 +274,8 @@
 <h3 id="3-控制公共组件是否展示"><a href="#3-控制公共组件是否展示" class="headerlink" title="3. 控制公共组件是否展示"></a>3. 控制公共组件是否展示</h3><p>利用条件判断指令 v-show 或 v-if 控制公共组件是否展示。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id=<span class="string">"app"</span>&gt;</span><br><span class="line"></span><br><span class="line">  	&lt;Header v-show=<span class="string">"path=='/'"</span>&gt;&lt;/Header&gt;</span><br><span class="line"></span><br><span class="line">	&lt;router-view/&gt;</span><br><span class="line">		</span><br><span class="line">	&lt;Footer v-show=<span class="string">"path=='/'"</span>&gt;&lt;/Footer&gt;</span><br><span class="line"></span><br><span class="line">&lt;<span class="regexp">/div&gt;</span></span><br></pre></td></tr></table></figure>
 
-<p>访问Vue项目时的默认路径为 / ，这时 &lt;Header&gt;  &lt;Footer&gt; 默认展示。</p>
-<p>当点击 &lt;Header&gt; 中登录按钮触发路由”/login”，路由变化触发监听函数：</p>
+<p>访问Vue项目时的默认路径为 / ，这时&lt;Header&gt; &lt;Footer&gt;默认展示。</p>
+<p>当点击&lt;Header&gt;中登录按钮触发路由”/login”，路由变化触发监听函数：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//监测Vue实例上的数据变动</span></span><br><span class="line">watch:&#123;</span><br><span class="line">    $route(to,from)&#123;</span><br><span class="line">       <span class="keyword">this</span>.path = to.path</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>定义的数据 path 的值变为 /login ，条件判断指令 v-show 生效隐藏掉 <code>&lt;Header&gt;</code> <code>&lt;Footer&gt;</code> ，这时页面展示的只有login.vue，需求达成。</p>
