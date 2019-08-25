@@ -67,7 +67,7 @@
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/images/20190824_01.PNG">
 <meta property="og:image" content="http://yoursite.com/images/20190824_02.PNG">
-<meta property="og:updated_time" content="2019-08-25T02:24:16.214Z">
+<meta property="og:updated_time" content="2019-08-25T02:34:39.286Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Vue单页面框架实现多页面效果">
 <meta name="twitter:description" content="简介Vue.js（简称为Vue）是一个用于创建用户界面的开源JavaScript框架，也是一个创建单页应用的Web应用框架。但是在开发过程中有时需要展示多页面效果，比如用户登录注册页面需要展示一个全新的页面，路由跳转时需要展示一个新的导航栏。如果直接使用路由跳转，页面中会同时展示App.vue中的公共组件和该路由组件，达不到所需效果。">
@@ -243,7 +243,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-08-25 10:24:16" itemprop="dateModified" datetime="2019-08-25T10:24:16+08:00">2019-08-25</time>
+                <time title="修改时间：2019-08-25 10:34:39" itemprop="dateModified" datetime="2019-08-25T10:34:39+08:00">2019-08-25</time>
               </span>
             
           
@@ -260,7 +260,7 @@
 
       
         <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>Vue.js（简称为Vue）是一个用于创建用户界面的开源JavaScript框架，也是一个创建单页应用的Web应用框架。但是在开发过程中有时需要展示多页面效果，比如用户登录注册页面需要展示一个全新的页面，路由跳转时需要展示一个新的导航栏。如果直接使用路由跳转，页面中会同时展示App.vue中的公共组件和该路由组件，达不到所需效果。</p><a id="more"></a>
-<h2 id="实现思路"><a href="#实现思路" class="headerlink" title="实现思路"></a>实现思路</h2><p>假如现在要从主页面跳转到登录页，App.vue中有导航栏组件 &lt;Header&gt; 和 &lt;router-view/&gt; ，点击组件 &lt;Header&gt; 中的登录按钮，触发路由”/login”后，会将login.vue展示到 &lt;router-view/&gt; 区域。由于App.vue中的公共组件 &lt;Header&gt; 会默认展示，登录组件会和导航组件展示到同一页面中，这时想办法隐藏掉公共组件 &lt;Header&gt; 即可。</p>
+<h2 id="实现思路"><a href="#实现思路" class="headerlink" title="实现思路"></a>实现思路</h2><p>假如现在要从主页面跳转到登录页，App.vue中有导航栏组件&lt;Header&gt;和&lt;router-view/&gt;，点击组件&lt;Header&gt;中的登录按钮，触发路由”/login”后，会将login.vue展示到&lt;router-view/&gt;区域。由于App.vue中的公共组件&lt;Header&gt;会默认展示，登录组件会和导航组件展示到同一页面中，这时想办法隐藏掉公共组件&lt;Header&gt;即可。</p>
 <h2 id="实现过程"><a href="#实现过程" class="headerlink" title="实现过程"></a>实现过程</h2><h3 id="1-建立组件，添加路由"><a href="#1-建立组件，添加路由" class="headerlink" title="1. 建立组件，添加路由"></a>1. 建立组件，添加路由</h3><p>App.vue</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div id=<span class="string">"app"</span>&gt;</span><br><span class="line"></span><br><span class="line">  	&lt;Header v-show=<span class="string">"path=='/'"</span>&gt;&lt;/Header&gt;</span><br><span class="line"></span><br><span class="line">	&lt;router-view/&gt;</span><br><span class="line">		</span><br><span class="line">	&lt;Footer v-show=<span class="string">"path=='/'"</span>&gt;&lt;/Footer&gt;</span><br><span class="line"></span><br><span class="line">  &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">&lt;/</span>template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">	<span class="keyword">import</span> Footer <span class="keyword">from</span> <span class="string">'@/components/Footer'</span></span><br><span class="line">	<span class="keyword">import</span> Header <span class="keyword">from</span> <span class="string">'@/components/Header'</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">		name: <span class="string">'App'</span>,</span><br><span class="line">		components:&#123;</span><br><span class="line">		  	Header,</span><br><span class="line">		  	Footer</span><br><span class="line">		&#125;,</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">&lt;style&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>style&gt;</span><br></pre></td></tr></table></figure>
 
